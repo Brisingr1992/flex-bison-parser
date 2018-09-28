@@ -134,7 +134,7 @@ expr:
       if ($1.type == 'i') $<table.value.ival>$ = $1.value.ival - $3.value.ival;
       else $<table.value.fval>$ = $1.value.fval - $3.value.fval;
     }
-  | 	expr SUB expr 
+  | expr ADD expr 
     {
       if($1.type != $3.type) {
         fprintf(stderr, "Line %d, type error\n", line_num);
