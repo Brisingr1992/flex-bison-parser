@@ -3,15 +3,14 @@
 To run this program type `make` and then run `./calc`. Use `make clean` to clean all the junk files.
 
 This program follows the context free grammer defined by these rules:
-`
-Prog -> main() {Vardefs; Stmts} Vardefs -> ε | Vardef; Vardefs
-Vardef -> int Id | float Id
-Stmts -> ε | Stmt; Stmts
-Stmt -> Id = E | printID Id | printExp E
-E -> Integer | Float | Id | E - E | E * E | E / E | E + E
-Integer -> digit+
-Float -> Integer . Integer | Integer”E”Integer | Float”E”Integer
-`
+`Prog -> main() {Vardefs; Stmts}`
+`Vardefs -> ε | Vardef; Vardefs`
+`Vardef -> int Id | float Id`
+`Stmts -> ε | Stmt; Stmts`
+`Stmt -> Id = E | printID Id | printExp E`
+`E -> Integer | Float | Id | E - E | E * E | E / E | E + E`
+`Integer -> digit+`
+`Float -> Integer . Integer | Integer”E”Integer | Float”E”Integer`
 
 ### Grammer
 
@@ -35,4 +34,4 @@ If there is an syntax error, line number for the error is printed
 
 ###### Also there is a simple demonstration of semantics via symbol table using a simple linked list and there is type checking also.
 
-###### I made this project for an assignment and putting this up for the people who need a quick reference for flex and bison implementation.
+#### I made this project for an assignment and putting this up for the people who need a quick reference for flex and bison implementation.
