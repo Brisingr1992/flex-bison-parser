@@ -8,4 +8,5 @@
 *.tab.h
 *.tab.c
 lex.yy.c
-*.o
+*.output
+calc
