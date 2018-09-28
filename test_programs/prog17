@@ -1,0 +1,10 @@
+main() {
+    int x;
+    int y;
+    float a;
+    float b;
+    y = 500*1 - x;
+    b = 100E4 - a; 
+    printExp y;
+    printExp x;
+}

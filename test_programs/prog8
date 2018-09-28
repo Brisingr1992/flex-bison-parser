@@ -1,0 +1,1 @@
+main() {float x; x = 1.2; printID x;}

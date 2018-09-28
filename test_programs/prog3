@@ -1,0 +1,1 @@
+main() {int x; x=20; x=x-2*5;printID x;}
