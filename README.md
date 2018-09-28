@@ -1,6 +1,6 @@
 # A simple parser with flex and bison
 
-To run this program type `make` and then run `./calc`. Use `make clean` to clean all the junk files.
+To run this program type `make` and then run `./calc`. Use `make clean` to clean all the junk files. If using mac, change the `lfl` flag to `ll` if its not compiling.
 
 This program follows the context free grammer defined by these rules:
 `Prog -> main() {Vardefs; Stmts}`
