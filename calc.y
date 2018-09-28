@@ -9,8 +9,8 @@ int yyerror(char *s);
 %}
 
 // Token Declarations
-%token SEMICOLON SUB MUL EQUAL ERROR
-%token INT_NUM FLOAT_NUM
+%token SEMICOLON SUB MUL EQUAL DIV ADD
+%token INT_NUM FLOAT_NUM ERROR
 %token MAIN PRINTID PRINTEXP
 %token INT FLOAT IDENTIFIER
 
@@ -44,8 +44,8 @@ int yyerror(char *s);
 %type <table> expr
 
 // Precendence of the arithmetic operations
-%left SUB
-%left MUL
+%left SUB ADD
+%left MUL DIV
 %right EQUAL
 
 // Starting Non-terminal
@@ -134,6 +134,19 @@ expr:
       if ($1.type == 'i') $<table.value.ival>$ = $1.value.ival - $3.value.ival;
       else $<table.value.fval>$ = $1.value.fval - $3.value.fval;
     }
+  | 	expr SUB expr 
+    {
+      if($1.type != $3.type) {
+        fprintf(stderr, "Line %d, type error\n", line_num);
+        char * error = "e";
+        yyerror(error);
+        YYERROR;
+      }
+
+      $<table.type>$ = $1.type;
+      if ($1.type == 'i') $<table.value.ival>$ = $1.value.ival + $3.value.ival;
+      else $<table.value.fval>$ = $1.value.fval + $3.value.fval;
+    }
 	| expr MUL expr
     {
       if($1.type != $3.type) {
@@ -147,6 +160,37 @@ expr:
       if ($1.type == 'i') $<table.value.ival>$ = $1.value.ival * $3.value.ival;
       else $<table.value.fval>$ = $1.value.fval * $3.value.fval;
     }
+  | expr DIV expr 
+    {
+      if($1.type != $3.type) {
+        fprintf(stderr, "Line %d, type error\n", line_num);
+        char * error = "e";
+        yyerror(error);
+        YYERROR;
+      }
+
+      $<table.type>$ = $1.type;
+      if ($1.type == 'i') {
+        if ($3.value.ival == 0) {
+          fprintf(stderr, "Can't divide by zero on line: %d\n", line_num);
+          char * error = "e";
+          yyerror(error);
+          YYERROR;
+        }
+
+        $<table.value.ival>$ = $1.value.ival / $3.value.ival;
+      }
+      else {
+        if ($3.value.fval == 0) {
+          fprintf(stderr, "Can't divide by zero on line: %d\n", line_num);
+          char * error = "e";
+          yyerror(error);
+          YYERROR;
+        }
+
+        $<table.value.fval>$ = $1.value.fval / $3.value.fval;
+      }
+    } 
 	| INT
     {
       $<table.type>$ = 'i';

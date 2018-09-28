@@ -29,6 +29,8 @@ upper  ([0-9A-Z])
 "="  { return(EQUAL); }
 "-"  {  return(SUB);  }
 "*"  {  return(MUL);  }
+"/"  {  return(DIV);  }
+"+"  {  return(ADD);  } 
 
 [\(\)\{\}]	{  return yytext[0]; }
 [ \t\f] ;
